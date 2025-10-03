@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thecreativesam</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  
+
+<style>
+/* Consolidated Styles */
+
+/* General Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body { line-height: 1.6; background: #f9f9f9; color: #333; transition: background 0.3s, color 0.3s; }
+body.dark { background: #121212; color: #eee; }
+
+/* Header */
+header { display: flex; align-items: center; justify-content: space-between;
+  background: #0d001a; color: #ccc; padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; gap: 1rem; }
+
+.menu-toggle { background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer; z-index:1100; }
+
+nav { position: fixed; top:0; right:-250px; height:100%; width:250px; background:#6200ea; padding:3rem 1rem;
+  display:flex; flex-direction:column; gap:1.5rem; transition:right 0.4s ease; z-index:1000; }
+nav.show { right:0; }
+nav a { color:#fff; text-decoration:none; font-size:1.1rem; }
+
+#darkModeBtn { background:#333; color:#fff; border:none; padding:0.5rem 1rem; border-radius:5px; cursor:pointer; }
+#darkModeBtn:hover { background:#555; }
+
+/* Hero Modern */
+.hero-modern { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+  align-items:center; text-align:center; background:linear-gradient(135deg,#0b001a,#1f0033); color:#fff; overflow:hidden; }
+
+.hero-logo { font-size:100px; color:#b388ff; margin-bottom:20px; text-shadow:0 0 20px #b388ff; animation:glow 2.5s infinite alternate; }
+@keyframes glow { 0%{text-shadow:0 0 10px #b388ff;} 50%{text-shadow:0 0 25px #b388ff;} 100%{text-shadow:0 0 10px #b388ff;} }
+
+.hero-title { font-size:48px; font-weight:700; margin-bottom:15px; }
+.hero-title span { background:linear-gradient(90deg,#7b2cbf,#b388ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+.hero-subtitle { font-size:16px; font-weight:300; max-width:500px; color:rgba(255,255,255,0.7); margin:0 auto 30px; }
+
+.scroll-down i { font-size:40px; color:#b388ff; animation:bounce 2s infinite; text-shadow:0 0 10px #b388ff; }
+@keyframes bounce { 0%,20%,50%,80%,100%{transform:translateY(0);} 40%{transform:translateY(10px);} 60%{transform:translateY(5px);} }
+
+/* Floating Shapes */
+.floating-shapes { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+.shape { position:absolute; opacity:0.3; background:rgba(123,44,191,0.3); animation:float 20s infinite linear; border-radius:12px; }
+.cube { width:40px; height:40px; } .sphere { width:30px; height:30px; border-radius:50%; }
+.triangle { width:0; height:0; border-left:20px solid transparent; border-right:20px solid transparent;
+  border-bottom:35px solid rgba(123,44,191,0.3); background:transparent; }
+.polygon { width:50px; height:50px; clip-path:polygon(50% 0%,0% 35%,20% 100%,80% 100%,100% 35%); }
+@keyframes float { 0%{transform:translate3d(0,0,0);} 100%{transform:translate3d(0,0,0) rotateX(720deg) rotateY(360deg);} }
+
+/* Buttons */
+.btn, .hero-btn, .dribbble-btn { display:inline-block; padding:0.8rem 1.5rem; border-radius:30px; text-decoration:none; font-weight:600; transition:all 0.3s ease; }
+.btn-filled { background:#9b5dff; color:#fff; border:2px solid #9b5dff; }
+.btn-outline { background:transparent; color:#9b5dff; border:2px solid #9b5dff; }
+
+/* Services, Process, Pricing, FAQ, Testimonials, Contact, Footer... (keep similar cleaned styles) */
+
+/* Preloader */
+#preloader { position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; display:flex; align-items:center; justify-content:center; z-index:2000; }
+.loader { border:5px solid #eee; border-top:5px solid #6200ea; border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Animations */
+.fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.show { opacity:1; transform:translateY(0); }
+
+</style>
+
+</head>
+
+<body>
+  <div id="preloader"><div class="loader"></div></div>
+  
+  <!-- Welcome Screen -->
+<div id="welcome">
+  <h1>
+    <span>W</span><span>E</span><span>L</span><span>C</span><span>O</span><span>M</span><span>E</span>
+  </h1>
+</div>
+
+
+
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("welcome").style.display = "none";
+    }, 2800); // shorter background display
+  });
+</script>
+
+  <header>
+    <h3><i class="fas fa-pen-nib"></i> Thecreativesam</h3>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+    <nav id="nav-links">
+      <button id="darkModeBtn">Dark Mode</button>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#design-process">My design process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+<section id="home" class="hero-modern">
+  <div class="container">
+
+    <!-- Hero Logo / Pen Icon -->
+    <div class="hero-logo">
+      <i class="fas fa-pen-nib"></i>
+    </div>
+
+    <!-- Hero Text -->
+    <div class="hero-content">
+      <h1 class="hero-title">Hi, I'm <span>sam</span></h1>
+      <p class="hero-subtitle">
+        I turn bold ideas into visuals that speak and position your brand for impact.
+      </p>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-down">
+      <i class="fas fa-angle-double-down"></i>
+    </div>
+
+    <!-- Advanced 3D Floating Shapes -->
+    <div class="floating-shapes">
+      <div class="shape cube"></div>
+      <div class="shape sphere"></div>
+      <div class="shape triangle"></div>
+      <div class="shape polygon"></div>
+      <div class="shape cube"></div>
+      <div class="shape sphere"></div>
+      <div class="shape triangle"></div>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <!-- Services Section -->
+<section id="services" class="fade-in">
+  <div class="container">
+    <h2>My Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-pen-nib"></i>
+        <h3 class="service-title">Logo Design</h3>
+        <p class="service-desc">Crafting unique logos that tell your brand’s story.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-shapes"></i>
+        <h3 class="service-title">Branding</h3>
+        <p class="service-desc">Building cohesive visuals — colors, fonts, and style guides.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-layer-group"></i>
+        <h3 class="service-title">Flyer Design</h3>
+        <p class="service-desc">Designing eye-catching flyers and posters for print & digital.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-palette"></i>
+        <h3 class="service-title">Social Creatives</h3>
+        <p class="service-desc">Creating branded templates to boost your online presence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CSS -->
+
+
+<section id="design-process" class="fade-in">
+  <div class="container">
+    <h2>My Design Process</h2>
+    <div class="process-boxes">
+      <div class="process-box">
+        <span class="step-number">01</span>
+        <h3><i class="fas fa-clipboard"></i> Briefing</h3>
+        <p>I begin by understanding your brand and goals through a simple brief or call — ensuring clarity before we create.</p>
+      </div>
+      <div class="process-box">
+        <span class="step-number">02</span>
+        <h3><i class="fas fa-pen-nib"></i> Concept Design</h3>
+        <p>Based on your vision, I develop tailored design concepts that align with your brand and audience.</p>
+      </div>
+      <div class="process-box">
+        <span class="step-number">03</span>
+        <h3><i class="fas fa-edit"></i> Revision</h3>
+        <p>You review the concepts and share feedback. I refine the design together, with up to 1–2 revision rounds.</p>
+      </div>
+      <div class="process-box">
+        <span class="step-number">04</span>
+        <h3><i class="fas fa-box-open"></i> Final Delivery</h3>
+        <p>Once approved, I deliver your high-quality designs in all required formats — ready for use online or in print.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="portfolio" class="fade-in" style="text-align:center;">
+  <h2 style="color:#6a00ff; margin-bottom:10px;">My Portfolio</h2>
+  <p style="color:#ccc; margin-bottom:25px;">Check out my latest creative designs on Dribbble.</p>
+  <a href="https://dribbble.com/samuel_omodion" target="_blank" class="dribbble-btn fade-in">
+    View My Work
+  </a>
+</section>
+
+<section id="pricing" style="text-align:center; padding:4rem 2rem; background:#1f1f1f; color:white;">
+  <h2 style="margin-bottom:2rem; color:#fff;">Pricing Plans</h2>
+
+  <div class="pricing-container">
+    <!-- Starter Plan -->
+    <div class="pricing-box">
+      <div class="ribbon">₦25,000</div>
+      <h3>Starter</h3>
+      <ul>
+        <li>Clean logo design</li>
+        <li>Basic brand color setup</li>
+        <li>3 social media templates</li>
+        <li>1 revision round</li>
+        <li>Delivery: 3–5 days</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Starter%20Plan%20(%E2%82%A625%2C000)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Get Started</a>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="pricing-box recommended">
+      <div class="ribbon">₦50,000</div>
+      <h3>Pro</h3>
+      <ul>
+        <li>Logo + brand variations</li>
+        <li>Full brand identity kit</li>
+        <li>6 custom social templates</li>
+        <li>2 revisions included</li>
+        <li>Delivery: 5–7 days</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Pro%20Plan%20(%E2%82%A650%2C000)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Choose Pro</a>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="pricing-box">
+      <div class="ribbon">₦85,000+</div>
+      <h3>Premium</h3>
+      <ul>
+        <li>Advanced branding package</li>
+        <li>Brand guidelines PDF</li>
+        <li>Social content direction</li>
+        <li>10 premium templates</li>
+        <li>Priority design support</li>
+        <li>Delivery: 7–10 days</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Premium%20Plan%20(%E2%82%A685%2C000%2B)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Let’s Talk</a>
+    </div>
+  </div>
+
+  <!-- Flyer Pricing Section -->
+  <h3 style="margin-top:3rem; margin-bottom:2rem; color:#fff;">Graphics-Only / Flyers</h3>
+  <div class="pricing-container">
+    <div class="pricing-box">
+      <div class="ribbon">₦5,000</div>
+      <h3>Basic Flyer</h3>
+      <ul>
+        <li>Single-page static flyer</li>
+        <li>Ready for print & digital use</li>
+        <li>1 revision</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Basic%20Flyer%20Plan%20(%E2%82%A65%2C000)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Get Started</a>
+    </div>
+
+    <div class="pricing-box recommended">
+      <div class="ribbon">₦12,000</div>
+      <h3>Standard</h3>
+      <ul>
+        <li>Up to 3 flyers</li>
+        <li>Consistent visual style</li>
+        <li>2 revisions</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Standard%20Flyer%20Plan%20(%E2%82%A612%2C000)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Choose Plan</a>
+    </div>
+
+    <div class="pricing-box">
+      <div class="ribbon">₦40,000</div>
+      <h3>Monthly Package</h3>
+      <ul>
+        <li>10 flyers/month</li>
+        <li>Content repurposing included</li>
+        <li>3 revisions</li>
+        <li>Priority delivery</li>
+      </ul>
+      <a href="https://wa.me/2349044819469?text=Hello%20Sam%2C%20I%20want%20the%20Monthly%20Package%20(%E2%82%A640%2C000)%2E" target="_blank" rel="noopener noreferrer" class="hero-btn">Get Started</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- About Me Section -->
+<section id="about" class="fade-in" style="padding:4rem 2rem; text-align:center; background:#111;">
+  <h2 style="margin-bottom:2rem; color:#fff;">About Me</h2>
+  <div style="max-width:900px; margin:0 auto; color:#ddd; line-height:1.8; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:2rem;">
+
+    <!-- Profile Image -->
+    <div style="flex:0 0 200px; text-align:center;">
+      <img src="profile.jpeg" alt="Samuel" style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid #9b5dff;">
+    </div>
+
+    <!-- Text Content -->
+    <div style="flex:1; min-width:280px; text-align:left;">
+      <h3 style="color:#fff; margin-bottom:1rem;">
+        Hi, I’m <span style="color:#9b5dff;">Samuel</span><br>
+        <span style="font-size:1.2rem;">Graphic Designer | Brand Creative | Visual Storyteller</span>
+      </h3>
+
+      <p style="margin-bottom:1.5rem;">
+        Based in <strong>Nigeria</strong> with <strong>4+ years of experience</strong>, I’m a passionate designer helping brands communicate their message through clean, modern visuals.  
+      </p>
+
+      <p style="margin-bottom:1.5rem;">
+        I combine <strong>creativity</strong> with <strong>strategy</strong> to deliver designs that connect and convert.
+      </p>
+
+      <h4 style="color:#fff; margin:1.5rem 0 0.8rem;">Specialties</h4>
+      <ul style="list-style:disc; padding-left:1.5rem;">
+        <li>Logo Design</li>
+        <li>Brand Identity</li>
+        <li>Flyers & Posters</li>
+        <li>Social Media Creatives</li>
+      </ul>
+
+      <h4 style="color:#fff; margin:2rem 0 0.8rem;">Tools I Use</h4>
+      <p style="margin-bottom:2rem;">
+          Photoshop | Figma
+      </p>
+
+      <!-- Buttons -->
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1rem;">
+        <a href="#contact" class="btn btn-filled">Start a Project</a>
+        <a href="#portfolio" class="btn btn-outline">View Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Button Styles -->
+
+
+<!-- Testimonials Section -->
+<section id="testimonials" style="padding: 60px 20px; text-align: center; background: #f9f7ff;">
+  <h2 style="margin-bottom: 2rem; color: #000;">What Clients Say</h2>
+  
+  <div class="testimonial-boxes">
+    <!-- Testimonial 1 -->
+    <div class="testimonial-card">
+      <i class="fas fa-user-circle avatar"></i>
+      <p class="testimonial-text"><i class="fas fa-quote-left quote-icon"></i>  
+        Samuel was amazing to work with! He captured my brand vision perfectly.  
+      <i class="fas fa-quote-right quote-icon"></i></p>
+      <h4 class="testimonial-name">— James A.</h4>
+    </div>
+
+    <!-- Testimonial 2 -->
+    <div class="testimonial-card">
+      <i class="fas fa-user-circle avatar"></i>
+      <p class="testimonial-text"><i class="fas fa-quote-left quote-icon"></i>  
+        Creative, professional, and timely. Highly recommend him for brand identity projects.  
+      <i class="fas fa-quote-right quote-icon"></i></p>
+      <h4 class="testimonial-name">— Grace O.</h4>
+    </div>
+
+    <!-- Testimonial 3 -->
+    <div class="testimonial-card">
+      <i class="fas fa-user-circle avatar"></i>
+      <p class="testimonial-text"><i class="fas fa-quote-left quote-icon"></i>  
+        His designs helped boost our online presence. Great experience overall!  
+      <i class="fas fa-quote-right quote-icon"></i></p>
+      <h4 class="testimonial-name">— Daniel K.</h4>
+    </div>
+  </div>
+</section>
+
+
+<section id="faq" style="padding:60px 20px; text-align:center; background:#f9f9f9;">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-container">
+
+    <!-- FAQ Item 1 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        How long does a logo design take? 
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="faq-answer">
+        <p>On average, a logo design takes 3–5 business days depending on the project scope.</p>
+      </div>
+    </div>
+
+    <!-- FAQ Item 2 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        How many revisions do I get? 
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="faq-answer">
+        <p>Most packages include 1–2 revision rounds to ensure the final design matches your vision.</p>
+      </div>
+    </div>
+
+    <!-- FAQ Item 3 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Do you provide source files? 
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, final designs are delivered with editable source files (AI, PSD, PDF, PNG, JPG).</p>
+      </div>
+    </div>
+
+    <!-- FAQ Item 4 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        What if I only need a flyer or poster? 
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="faq-answer">
+        <p>I offer separate flyer/poster packages, perfect for one-time campaigns or monthly bundles.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const faqItem = button.parentElement;
+    faqItem.classList.toggle('active');
+  });
+});
+</script>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="section-title">Contact Me</h2>
+    <p class="section-subtitle">Got an idea or project? I’d love to hear from you.</p>
+    
+    <form class="contact-form" onsubmit="submitForm(event)">
+      <div id="formMessage">Message sent!</div>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+
+<!-- Thank You Section -->
+<section id="thankyou" class="hero-modern">
+  <div class="container">
+
+    <!-- Thank You Text -->
+    <div class="hero-content">
+      <h1 class="hero-title">Thank <span>You!</span></h1>
+      <p class="hero-subtitle">
+        For viewing, hoping to work with you for your next project, see my socials below.
+      </p>
+    </div>
+
+    <!-- Advanced 3D Floating Shapes -->
+    <div class="floating-shapes">
+      <div class="shape cube"></div>
+      <div class="shape sphere"></div>
+      <div class="shape triangle"></div>
+      <div class="shape polygon"></div>
+      <div class="shape cube"></div>
+      <div class="shape sphere"></div>
+      <div class="shape triangle"></div>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>© 2025 Thecreativesam</p>
+    <div class="footer-socials">
+      <a href="mailto:samuelomodion3@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.facebook.com/samuelomodion" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/samuelomodion" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/samuelomodion" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.dribbble.com/samuelomodion" target="_blank"><i class="fab fa-dribbble"></i></a>
+      <a href="https://www.linkedin.com/in/samuelomodion" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</footer>
+
+
+
+  <script>
+    // Toggle slide-in menu
+    const nav = document.getElementById('nav-links');
+    function toggleMenu() { nav.classList.toggle('show'); }
+
+    // Close menu when link clicked
+    document.querySelectorAll('#nav-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        nav.classList.remove('show');
+        const target = document.querySelector(this.getAttribute("href"));
+        const headerOffset = 70;
+        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      });
+    });
+
+    // Dark Mode toggle
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    darkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      darkModeBtn.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+    });
+
+    // Preloader with fade-out
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      preloader.style.opacity = "0";
+      preloader.style.transition = "opacity 0.5s ease";
+      setTimeout(() => { preloader.style.display = "none"; }, 500);
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-in, .bounce-in').forEach(el => observer.observe(el));
+
+    // Contact form success message
+    function submitForm(event) {
+      event.preventDefault();
+      const messageDiv = document.getElementById("formMessage");
+      messageDiv.style.display = "block";
+      event.target.reset();
+      setTimeout(() => { messageDiv.style.display = "none"; }, 5000);
+    }
+  </script>
+</body>
+</html>
